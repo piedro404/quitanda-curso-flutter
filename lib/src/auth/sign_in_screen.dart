@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quitanda/src/auth/components/custom_text_field.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -10,40 +11,34 @@ class SignInScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              color: Colors.green,
-            )
-          ),
+              child: Container(
+            color: Colors.green,
+          )),
           Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 40,
-              ),
-              decoration: const BoxDecoration(
+              child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 32,
+              vertical: 40,
+            ),
+            decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(45)
-                )
-              ),
-              child: Column(
-                children: [
-                  //Email
-                  TextFormField(
-                    decoration: InputDecoration(
-                      isDense: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18)
-                      )
-                    ),
-                  ),
-                  //Senha
-                  TextFormField()
-
-                ],
-              ),
-            )
-          ),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
+            child: Column(
+              children: const [
+                //Email
+                CustomTextField(
+                  icon: Icons.email,
+                  label: "Email",
+                ),
+                //Senha
+                CustomTextField(
+                  icon: Icons.lock,
+                  label: "Senha",
+                  isObscureText: true,
+                ),
+              ],
+            ),
+          )),
         ],
       ),
     );
