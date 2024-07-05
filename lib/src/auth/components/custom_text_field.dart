@@ -47,13 +47,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
             labelText: widget.label,
             isDense: true,
             contentPadding:
-                EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
             ),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(color: Colors.green, width: 2.0))),
+                borderSide: const BorderSide(color: Colors.green, width: 2.0))),
       ),
     );
   }
