@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quitanda/src/auth/components/custom_text_field.dart';
+import 'package:quitanda/src/auth/sign_up_screen.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -163,7 +164,15 @@ class SignInScreen extends StatelessWidget {
                                 color: Colors.green,
                                 width: 2,
                               )),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (e) {
+                                  return SignUpScreen();
+                                }
+                              )
+                            );
+                          },
                           child: const Text(
                             "Criar Conta",
                             style: TextStyle(fontSize: 18),
