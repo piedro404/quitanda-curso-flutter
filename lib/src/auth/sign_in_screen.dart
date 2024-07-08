@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quitanda/src/auth/components/custom_text_field.dart';
 import 'package:quitanda/src/auth/sign_up_screen.dart';
+import 'package:quitanda/src/base/base_screen.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -12,9 +13,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
-    
+
     return Scaffold(
       backgroundColor: CustomColors.customSwatchColor,
       body: SingleChildScrollView(
@@ -49,7 +49,7 @@ class SignInScreen extends StatelessWidget {
                             ),
                           ]),
                     ),
-          
+
                     // Categorias
                     SizedBox(
                       height: 30,
@@ -57,14 +57,17 @@ class SignInScreen extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 25,
                         ),
-                        child: AnimatedTextKit(pause: Duration.zero, repeatForever: true, animatedTexts: [
-                          FadeAnimatedText("Frutas"),
-                          FadeAnimatedText("Verduras"),
-                          FadeAnimatedText("Legumes"),
-                          FadeAnimatedText("Carnes"),
-                          FadeAnimatedText("Cereais"),
-                          FadeAnimatedText("Laticinios"),
-                        ]),
+                        child: AnimatedTextKit(
+                            pause: Duration.zero,
+                            repeatForever: true,
+                            animatedTexts: [
+                              FadeAnimatedText("Frutas"),
+                              FadeAnimatedText("Verduras"),
+                              FadeAnimatedText("Legumes"),
+                              FadeAnimatedText("Carnes"),
+                              FadeAnimatedText("Cereais"),
+                              FadeAnimatedText("Laticinios"),
+                            ]),
                       ),
                     ),
                   ],
@@ -104,7 +107,13 @@ class SignInScreen extends StatelessWidget {
                           backgroundColor: Colors.green,
                         ),
                         onPressed: () {
-                          // Adicione aqui a ação do botão
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (e) {
+                                return const BaseScreen();
+                              },
+                            ),
+                          );
                         },
                         child: const Text(
                           "Entrar",
@@ -165,13 +174,10 @@ class SignInScreen extends StatelessWidget {
                                 width: 2,
                               )),
                           onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (e) {
-                                  return SignUpScreen();
-                                }
-                              )
-                            );
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (e) {
+                              return SignUpScreen();
+                            }));
                           },
                           child: const Text(
                             "Criar Conta",
