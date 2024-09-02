@@ -16,7 +16,23 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Colors.white.withAlpha(190)
+        scaffoldBackgroundColor: Colors.white.withAlpha(190),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            backgroundColor: Colors.green,
+            textStyle: const TextStyle(
+              fontSize: 18,
+            ),
+            foregroundColor: Colors.white,
+          ),
+        )
       ),
       debugShowCheckedModeBanner: false,
       home: const SignInScreen(),
