@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
+import 'package:quitanda/src/models/cart_item_model.dart';
+import 'package:quitanda/src/pages/cart/components/cart_tile.dart';
 import 'package:quitanda/src/services/utils_services.dart';
+import 'package:quitanda/src/config/app_data.dart' as appData;
 
 class CartTab extends StatelessWidget {
   final UtilServices utilServices = UtilServices();
@@ -15,9 +19,12 @@ class CartTab extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: Placeholder(
-              color: Colors.red,
+          Expanded(
+            child: ListView.builder(
+              itemCount: appData.cartItem.length,
+              itemBuilder: (_, index) {
+                return CartTile(cartItem: appData.cartItem[index]);
+              },
             ),
           ),
           Container(
@@ -52,11 +59,14 @@ class CartTab extends StatelessWidget {
                 SizedBox(
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {}, 
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: CustomColors.customSwatchColor,
                     ),
-                    child: const Text('Concluir Pedido', style: TextStyle(fontSize: 18, color: Colors.white),),
+                    child: const Text(
+                      'Concluir Pedido',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
                 ),
               ],
