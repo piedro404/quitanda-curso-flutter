@@ -7,8 +7,9 @@ import 'package:quitanda/src/services/utils_services.dart';
 class CartTile extends StatefulWidget {
   final CartItemModel cartItem;
   final Function(CartItemModel) remove;
+  final VoidCallback onUpdate; 
 
-  const CartTile({super.key, required this.cartItem, required this.remove});
+  const CartTile({super.key, required this.cartItem, required this.remove, required this.onUpdate});
 
   @override
   State<CartTile> createState() => _CartTileState();
@@ -50,6 +51,8 @@ class _CartTileState extends State<CartTile> {
               if (quantity == 0) {
                 widget.remove(widget.cartItem);
               }
+
+              widget.onUpdate();
             });
           },
           isRemovable: true,

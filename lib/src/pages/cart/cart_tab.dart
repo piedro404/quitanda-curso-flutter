@@ -7,7 +7,6 @@ import 'package:quitanda/src/services/utils_services.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
 
 class CartTab extends StatefulWidget {
-
   const CartTab({super.key});
 
   @override
@@ -23,6 +22,16 @@ class _CartTabState extends State<CartTab> {
     });
   }
 
+  double cartTotalPrice() {
+    double totalPrice = 0;
+
+    for (var item in appData.cartItem) {
+      totalPrice += item.totalPrice();
+    }
+
+    return totalPrice;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +44,12 @@ class _CartTabState extends State<CartTab> {
             child: ListView.builder(
               itemCount: appData.cartItem.length,
               itemBuilder: (_, index) {
-                return CartTile(cartItem: appData.cartItem[index], remove: removeItemFromCart);
+                return CartTile(
+                    cartItem: appData.cartItem[index],
+                    remove: removeItemFromCart,
+                    onUpdate: () {
+                      setState(() {});
+                    });
               },
             ),
           ),
@@ -62,7 +76,7 @@ class _CartTabState extends State<CartTab> {
                   style: TextStyle(fontSize: 12),
                 ),
                 Text(
-                  utilServices.priceToCurrency(50.50),
+                  utilServices.priceToCurrency(cartTotalPrice()),
                   style: TextStyle(
                       fontSize: 23,
                       color: CustomColors.customSwatchColor,
