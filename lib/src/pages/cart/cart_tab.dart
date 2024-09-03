@@ -6,10 +6,22 @@ import 'package:quitanda/src/pages/cart/components/cart_tile.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 import 'package:quitanda/src/config/app_data.dart' as appData;
 
-class CartTab extends StatelessWidget {
+class CartTab extends StatefulWidget {
+
+  const CartTab({super.key});
+
+  @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
   final UtilServices utilServices = UtilServices();
 
-  CartTab({super.key});
+  void removeItemFromCart(CartItemModel cartItem) {
+    setState(() {
+      appData.cartItem.remove(cartItem);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +35,7 @@ class CartTab extends StatelessWidget {
             child: ListView.builder(
               itemCount: appData.cartItem.length,
               itemBuilder: (_, index) {
-                return CartTile(cartItem: appData.cartItem[index]);
+                return CartTile(cartItem: appData.cartItem[index], remove: removeItemFromCart);
               },
             ),
           ),

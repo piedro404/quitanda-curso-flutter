@@ -4,11 +4,18 @@ import 'package:quitanda/src/models/cart_item_model.dart';
 import 'package:quitanda/src/pages/common_widgets/quantity_widget.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
-class CartTile extends StatelessWidget {
+class CartTile extends StatefulWidget {
   final CartItemModel cartItem;
-  final UtilServices utilServices = UtilServices();
+  final Function(CartItemModel) remove;
 
-  CartTile({super.key, required this.cartItem});
+  const CartTile({super.key, required this.cartItem, required this.remove});
+
+  @override
+  State<CartTile> createState() => _CartTileState();
+}
+
+class _CartTileState extends State<CartTile> {
+  final UtilServices utilServices = UtilServices();
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +26,33 @@ class CartTile extends StatelessWidget {
       ),
       child: ListTile(
         leading: Image.asset(
-          cartItem.item.imgUrl,
+          widget.cartItem.item.imgUrl,
           height: 60,
           width: 60,
         ),
         title: Text(
-          cartItem.item.itemName,
+          widget.cartItem.item.itemName,
           style: const  TextStyle(
             fontWeight: FontWeight.w500,
           ),
         ),
-        subtitle: Text(utilServices.priceToCurrency(cartItem.totalPrice()), style: TextStyle(
+        subtitle: Text(utilServices.priceToCurrency(widget.cartItem.totalPrice()), style: TextStyle(
           color: CustomColors.customSwatchColor,
           fontWeight: FontWeight.bold,
         ),),
         trailing: QuantityWidget(
-          suffixText: cartItem.item.unit,
-          value: cartItem.quantity,
-          result: (quantity){},
+          suffixText: widget.cartItem.item.unit,
+          value: widget.cartItem.quantity,
+          result: (quantity) {
+            setState(() {
+              widget.cartItem.quantity = quantity;
+
+              if (quantity == 0) {
+                widget.remove(widget.cartItem);
+              }
+            });
+          },
+          isRemovable: true,
         ),
       ),
     );
