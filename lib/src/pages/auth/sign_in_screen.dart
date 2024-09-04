@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/base/base_screen.dart';
 
-import 'components/custom_text_field.dart';
+import '../common_widgets/custom_text_field.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {

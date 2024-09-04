@@ -32,7 +32,21 @@ class MyApp extends StatelessWidget {
             ),
             foregroundColor: Colors.white,
           ),
-        )
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            side: const BorderSide(
+              color: Colors.green,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            foregroundColor: Colors.green,
+            textStyle: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const SignInScreen(),
