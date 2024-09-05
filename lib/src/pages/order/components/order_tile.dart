@@ -6,6 +6,7 @@ import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/models/cart_item_model.dart';
 import 'package:quitanda/src/models/item_model.dart';
 import 'package:quitanda/src/models/order_model.dart';
+import 'package:quitanda/src/pages/order/components/order_status_widget.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
 class OrderTile extends StatelessWidget {
@@ -51,15 +52,26 @@ class OrderTile extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: ListView(
-                      children: order.items.map((orderItem) { 
-                        return _OrderItemWidget(utilServices: utilServices, orderItem: orderItem,);
+                      children: order.items.map((orderItem) {
+                        return _OrderItemWidget(
+                          utilServices: utilServices,
+                          orderItem: orderItem,
+                        );
                       }).toList(),
                     ),
                   ),
+                  VerticalDivider(
+                    color: Colors.grey.shade300,
+                    thickness: 2,
+                    width: 8,
+                  ),
                   Expanded(
                     flex: 2,
-                    child: Container(
-                      color: Colors.blue,
+                    child: OrderStatusWidget(
+                      status: order.status,
+                      isOverdue: order.overdueDateTime.isBefore(
+                        DateTime.now(),
+                      ),
                     ),
                   ),
                 ],
