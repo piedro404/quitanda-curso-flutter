@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:quitanda/src/models/cart_item_model.dart';
 
 class OrderModel {

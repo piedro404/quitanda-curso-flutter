@@ -6,6 +6,7 @@ import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/models/cart_item_model.dart';
 import 'package:quitanda/src/models/item_model.dart';
 import 'package:quitanda/src/models/order_model.dart';
+import 'package:quitanda/src/pages/common_widgets/payment_dialog.dart';
 import 'package:quitanda/src/pages/order/components/order_status_widget.dart';
 import 'package:quitanda/src/services/utils_services.dart';
 
@@ -107,7 +108,16 @@ class OrderTile extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return PaymentDialog(
+                        order: order,
+                      );
+                    },
+                  );
+                },
                 icon: const Icon(Icons.pix),
                 label: const Text('Ver QR Code Pix'),
               ),
