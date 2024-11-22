@@ -2,9 +2,12 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
 import 'package:quitanda/src/pages/base/base_screen.dart';
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
+import 'package:quitanda/src/pages_routes/app_pages.dart';
 
 import '../common_widgets/custom_text_field.dart';
 import 'sign_up_screen.dart';
@@ -91,13 +94,7 @@ class SignInScreen extends StatelessWidget {
                           backgroundColor: Colors.green,
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (e) {
-                                return const BaseScreen();
-                              },
-                            ),
-                          );
+                          Get.offNamed(PagesRoutes.baseRoute);
                         },
                         child: const Text(
                           "Entrar",
@@ -158,10 +155,7 @@ class SignInScreen extends StatelessWidget {
                                 width: 2,
                               )),
                           onPressed: () {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (e) {
-                              return SignUpScreen();
-                            }));
+                            Get.offNamed(PagesRoutes.signUpRoute);
                           },
                           child: const Text(
                             "Criar Conta",
