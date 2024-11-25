@@ -4,8 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
+import 'package:quitanda/src/pages/auth/controller/auth_controller.dart';
 import 'package:quitanda/src/pages/base/base_screen.dart';
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
@@ -17,6 +19,9 @@ class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
   final _foreKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final passwordfController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +84,7 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       // Email
                       CustomTextField(
+                        controller: emailController,
                         icon: Icons.email,
                         label: "Email",
                         validator: (email) {
@@ -93,6 +99,7 @@ class SignInScreen extends StatelessWidget {
                       ),
                       // Senha
                       CustomTextField(
+                        controller: passwordfController,
                         icon: Icons.lock,
                         label: "Senha",
                         isSecret: true,
@@ -109,25 +116,45 @@ class SignInScreen extends StatelessWidget {
                       // Botão de Entrar
                       SizedBox(
                         height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            backgroundColor: Colors.green,
-                          ),
-                          onPressed: () {
-                            if (_foreKey.currentState!.validate()) {}
+                        child: GetX<AuthController>(
+                          builder: (authController) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                backgroundColor: Colors.green,
+                              ),
+                              onPressed: authController.isLoading.value
+                                  ? null
+                                  : () {
+                                      FocusScope.of(context).unfocus();
+                                      if (_foreKey.currentState!.validate()) {
+                                        String email = emailController.text;
+                                        String password =
+                                            passwordfController.text;
 
-                            // Get.offNamed(PagesRoutes.baseRoute);
+                                        authController.signIn(
+                                          email: email,
+                                          password: password,
+                                        );
+                                      } else {
+                                        print("Campos não válidos!");
+                                      }
+
+                                      // Get.offNamed(PagesRoutes.baseRoute);
+                                    },
+                              child: authController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : const Text(
+                                      "Entrar",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                            );
                           },
-                          child: const Text(
-                            "Entrar",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
                         ),
                       ),
                       // Esqueceu a Senha
