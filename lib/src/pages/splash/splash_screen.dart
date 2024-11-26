@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:quitanda/src/config/custom_colors.dart';
-import 'package:quitanda/src/pages/auth/sign_in_screen.dart';
+import 'package:quitanda/src/pages/auth/view/sign_in_screen.dart';
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
 

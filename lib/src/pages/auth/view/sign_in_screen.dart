@@ -12,7 +12,7 @@ import 'package:quitanda/src/pages/base/base_screen.dart';
 import 'package:quitanda/src/pages/common_widgets/app_name_widget.dart';
 import 'package:quitanda/src/pages_routes/app_pages.dart';
 
-import '../common_widgets/custom_text_field.dart';
+import '../../common_widgets/custom_text_field.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
